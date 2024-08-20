@@ -1,0 +1,261 @@
+General styles
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .flex-1 {
+    flex: 1;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .h-full {
+    height: 100%;
+  }
+  
+  .py-12 {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+  .p-8 {
+    padding: 8px;
+  }
+  
+  .bg-lightgreen {
+    background-color: #d8f3dc;
+  }
+  
+  .bg-white {
+    background-color: white;
+  }
+  
+  .border {
+    border: 1px solid;
+  }
+  
+  .border-gray-300 {
+    border-color: #d1d5db;
+  }
+  
+  .border-red-500 {
+    border-color: #f56565;
+  }
+  
+  .rounded-md {
+    border-radius: 0.375rem;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bg-red-600 {
+    background-color: #e53e3e;
+  }
+  
+  .bg-yellow-600 {
+    background-color: #ecc94b;
+  }
+  
+  .bg-blue-600 {
+    background-color: #3182ce;
+  }
+  
+  .bg-green-600 {
+    background-color: #48bb78;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    background-color: #d1d5db;
+    padding: 0 16px;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .navbar-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #0b5a39;
+  }
+  
+  .quiz-title-input {
+    width: 384px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    padding: 8px;
+  }
+  
+  /* Button styles */
+  .btn-add-question {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-exit, .btn-save {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .btn-exit:hover, .btn-save:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 320px;
+    background-color: #03300b;
+    padding: 16px;
+  }
+  
+  .sidebar-question {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 128px;
+    background-color: #a3b18a;
+    border-radius: 0.375rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-question-title {
+    font-size: 1.125rem;
+    text-align: center;
+  }
+  
+  /* Question styles */
+  .question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 896px;
+    height: 100%;
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background-color: #e9ecef;
+    border-radius: 0.375rem;
+  }
+  
+  .question-input {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.125rem;
+    text-align: center;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .option-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #f56565;
+  }
+  
+  .option-icon {
+    display: flex;
+    width: 56px;
+    height: 96px;
+    border-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon {
+    font-size: 1.875rem;
+    fill: white;
+  }
+  
+  .option-input {
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 100%;
+    height: 80px;
+    padding: 16px;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 0.375rem;
+    background-color: transparent;
+    color: black;
+  }
+  
+  .checkbox-checked {
+    font-size: 2.25rem;
+  }
+  
+  .checkbox-unchecked {
+    font-size: 2.25rem;
+  }
+  
