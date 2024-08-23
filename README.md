@@ -1,6 +1,6 @@
 # Quizzy
 
-Welcome to **Quizzy**! Quizzy is a dynamic web-based application designed to create, manage, and take quizzes on a variety of topics. It provides an interactive platform for both quiz creators and participants.
+Welcome to **Quizzy**! Quizzy is a dynamic web-based application designed to create, manage, and take quizzes on a variety of topics. It offers an interactive platform for quiz creators and participants, with features to use pre-made question templates and select questions based on difficulty, subject, and question type.
 
 ## Table of Contents
 
@@ -9,17 +9,18 @@ Welcome to **Quizzy**! Quizzy is a dynamic web-based application designed to cre
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [Creating and Managing Quizzes](#creating-and-managing-quizzes)
-6. [Contributing](#contributing)
+6. [Using Templates](#using-templates)
 7. [License](#license)
 
 ## Introduction
 
-**Quizzy** is designed to offer a user-friendly experience for creating and participating in quizzes. Whether you're an educator, a team leader, or just a trivia enthusiast, Quizzy provides a robust platform to test and improve knowledge.
+**Quizzy** provides an easy-to-use interface for creating and participating in quizzes. The app is ideal for educators, team leaders, and trivia enthusiasts. One of its standout features is the ability to use pre-made question templates, which allows users to select questions based on difficulty, subject, and type.
 
 ## Features
 
-- **Create Quizzes**: Build quizzes with various question types including multiple choice and true/false.
-- **User Participation**: Users can take quizzes and get instant feedback on their answers.
+- **Create Quizzes**: Build quizzes with multiple-choice or true/false questions.
+- **Use Templates**: Access a library of pre-made question templates and select questions based on difficulty, subject, and type.
+- **User Participation**: Participants can take quizzes and receive instant feedback.
 - **Results Tracking**: View detailed results and performance metrics for completed quizzes.
 - **Responsive Design**: Fully functional on both desktop and mobile devices.
 - **User Authentication**: Secure login system for managing user data and quiz access.
@@ -35,6 +36,7 @@ To set up **Quizzy** locally, follow these instructions:
 2. Navigate into the project directory:
     ```bash
     cd Quizzy
+    cd client
     ```
 3. Install the necessary dependencies:
     ```bash
@@ -57,7 +59,7 @@ To start using **Quizzy**, follow these steps:
 - **Create a Quiz**:
   - Navigate to the "Create Quiz" section.
   - Enter quiz details including title and description.
-  - Add questions by entering the question text and possible answers.
+  - Add questions by either typing them in or selecting from pre-made question templates. Choose questions based on difficulty (easy, medium, hard), subject (e.g., science, history), and type (e.g., multiple-choice, true/false).
   - Save the quiz to make it available for participants.
 
 - **Take a Quiz**:
@@ -72,37 +74,27 @@ To create and manage quizzes, follow these steps:
 
 1. **Creating a Quiz**:
     - Go to the "Create Quiz" page.
-    - Fill out the quiz title, description, and any other details.
-    - Add questions with multiple choice or true/false answers.
-    - Save the quiz.
+    - Fill out the quiz title, description, and other relevant details.
+    - Add questions by selecting them from the "Templates" section or by creating new ones.
+    - Customize questions if needed and save the quiz.
 
 2. **Managing Quizzes**:
     - Navigate to the "Manage Quizzes" section to view, edit, or delete existing quizzes.
     - Update questions or quiz details as needed.
 
-## Contributing
+## Using Templates
 
-We welcome contributions to **Quizzy**! To contribute, please follow these guidelines:
+**Quizzy** provides a library of pre-made question templates to simplify quiz creation. To use these templates:
 
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature/your-feature
-    ```
-3. Make your changes and commit them:
-    ```bash
-    git commit -am 'Add new feature or fix'
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature/your-feature
-    ```
-5. Open a Pull Request with a description of your changes.
+1. Go to the "Templates" section.
+2. Browse through available templates organized by subject, difficulty, and type.
+3. Select and add questions to your quiz. You can filter templates based on:
+   - **Difficulty**: Choose from easy, medium, or hard questions.
+   - **Subject**: Select questions related to specific subjects like science, history, or literature.
+   - **Type**: Pick question types such as multiple-choice or true/false.
+4. Customize the selected questions if needed and add them to your quiz.
+
 
 ## License
 
 **Quizzy** is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to modify or extend this README to better suit the needs of your project or to add any additional information you think might be relevant.
