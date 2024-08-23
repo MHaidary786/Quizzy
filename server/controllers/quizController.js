@@ -34,37 +34,46 @@ exports.getAllQuizzes = async (req, res) => {
   }
 };
 
-// Get a quiz with optional query parameters
+// Create and save a quiz with a unique quizId
 exports.getQuiz = async (req, res) => {
-  try {
-    const { amount, category, difficulty, type } = req.query;
-
-    if (!amount) {
-      return res
-        .status(400)
-        .send("Please provide the amount of the questions!");
+    try {
+      const { amount, category, difficulty, type } = req.query;
+  
+      if (!amount) {
+        return res.status(400).send("Please provide the amount of the questions!");
+      }
+  
+      const params = { amount, category, difficulty, type };
+      const url = buildQuizUrl(params);
+  
+      const response = await fetch(url);
+      if (!response.ok) {
+        return res.status(response.status).send(`Error: ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+      const questions = data.results;
+  
+      // Create a new quiz document
+      const quiz = new Quiz({
+        quizId: new mongoose.Types.ObjectId().toString(), // Generate a unique quizId
+        title: "Sample Quiz Title", // Set a title or use a dynamic title
+      });
+  
+      // Save the quiz document
+      await quiz.save();
+  
+      // Save questions and link them to the quiz
+      const savedQuestions = await Question.insertMany(questions);
+      quiz.questions = savedQuestions.map(question => question._id); // Link questions to the quiz
+      await quiz.save(); // Update the quiz with question references
+  
+      res.status(200).json({ quizId: quiz.quizId, questions: data.results });
+    } catch (error) {
+      console.error("Error in getQuiz:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    const params = { amount, category, difficulty, type };
-    const url = buildQuizUrl(params);
-
-    const response = await fetch(url);
-    if (!response.ok) {
-      return res.status(response.status).send(`Error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    const questions = data.results;
-
-    // Save questions to the database
-    await Question.insertMany(questions);
-
-    res.status(200).json(data);
-  } catch (error) {
-    console.error("Error in getQuiz:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
+  };
 
 // Add this function to your backend
 exports.getSavedQuestions = async (req, res) => {
@@ -101,13 +110,14 @@ exports.getSavedQuestions = async (req, res) => {
 //   } catch (error) {}
 // };
 
-
 exports.submitAnswers = async (req, res) => {
     try {
       const { userId, quizId, answers } = req.body;
+      console.log(`Received quizId: ${quizId}`); // Add this line for debugging
   
       // Retrieve the quiz to get the correct answers
       const quiz = await Quiz.findById(quizId).populate("questions");
+      console.log(`Quiz found: ${quiz}`); // Add this line for debugging
   
       if (!quiz) {
         return res.status(404).json({ error: "Quiz not found" });

@@ -39,7 +39,7 @@ const Home = () => {
       <Navbar loggedin={loggedin} />
 
       <main className="flex-grow container mx-auto my-10 px-4">
-        <section className="flex flex-col lg:flex-row gap-10 justify-center">
+        {/* <section className="flex flex-col lg:flex-row gap-10 justify-center">
           <div className="card lg:card-side bg-base-100 max-w-xl shadow-xl text-white">
             <img  alt="Album" />
           </div>
@@ -58,7 +58,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="text-center my-12">
           <p className="text-xl mx-auto max-w-4xl">

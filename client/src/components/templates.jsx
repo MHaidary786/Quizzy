@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
 export default function Templates() {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
@@ -46,14 +44,14 @@ export default function Templates() {
   };
 
   return (
-    <div className="container mx-auto flex flex-col justify-center items-center h-screen bg-slate-200 p-4">
-      <h1 className="m-10 text-3xl font-bold">Select Your Quiz Parameters</h1>
-      <div className="w-full max-w-md">
+    <div className="container mx-auto flex flex-col justify-center items-center h-screen bg-gray-900 text-white p-4">
+      <h1 className="m-10 text-3xl font-bold text-gray-100">Select Your Quiz Parameters</h1>
+      <div className="w-full max-w-md bg-gray-800 p-6 rounded-lg shadow-lg">
         <div className="mb-4">
-          <label htmlFor="category" className="block text-lg font-semibold mb-2">Category</label>
+          <label htmlFor="category" className="block text-lg font-semibold mb-2 text-gray-300">Category</label>
           <select
             id="category"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 bg-gray-700 border border-gray-600 rounded text-white"
             value={selectedCategoryId}
             onChange={(e) => setSelectedCategoryId(e.target.value)}
           >
@@ -67,10 +65,10 @@ export default function Templates() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="type" className="block text-lg font-semibold mb-2">Type</label>
+          <label htmlFor="type" className="block text-lg font-semibold mb-2 text-gray-300">Type</label>
           <select
             id="type"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 bg-gray-700 border border-gray-600 rounded text-white"
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
           >
@@ -81,10 +79,10 @@ export default function Templates() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="difficulty" className="block text-lg font-semibold mb-2">Difficulty</label>
+          <label htmlFor="difficulty" className="block text-lg font-semibold mb-2 text-gray-300">Difficulty</label>
           <select
             id="difficulty"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 bg-gray-700 border border-gray-600 rounded text-white"
             value={selectedDifficulty}
             onChange={(e) => setSelectedDifficulty(e.target.value)}
           >
@@ -96,10 +94,10 @@ export default function Templates() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="amount" className="block text-lg font-semibold mb-2">Number of Questions</label>
+          <label htmlFor="amount" className="block text-lg font-semibold mb-2 text-gray-300">Number of Questions</label>
           <select
             id="amount"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 bg-gray-700 border border-gray-600 rounded text-white"
             value={selectedAmount}
             onChange={(e) => setSelectedAmount(e.target.value)}
           >
@@ -112,13 +110,13 @@ export default function Templates() {
 
         <button
           onClick={fetchQuestions}
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition-colors"
         >
           Fetch Questions
         </button>
 
         {error && (
-          <div className="mt-10 text-red-500">
+          <div className="mt-10 text-red-400">
             <p>{error}</p>
           </div>
         )}
@@ -126,4 +124,3 @@ export default function Templates() {
     </div>
   );
 }
-
