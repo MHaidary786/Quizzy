@@ -1,51 +1,56 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function OTPVerify() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
-  const [message, setMessage] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
+
+  const notify = (text, type) => {
+    toast(text, {
+      type,
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const handleVerify = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:4000/user/verifyotp",
-        {
-          email,
-          otp,
-        }
-      );
+      const response = await axios.post("http://localhost:5000/user/verifyotp", {
+        email,
+        otp,
+      });
       console.log(response.data);
-      setMessage("Verification successful.");
-      setShowMessage(true);
+      notify("Verification successful.", "success");
       setTimeout(() => {
-        setShowMessage(false);
         navigate("/");
       }, 3000);
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 404) {
-        setMessage("User not found.");
+        notify("User not found.", "error");
       } else if (error.response && error.response.status === 400) {
-        setMessage("Invalid or expired OTP.");
+        notify("Invalid or expired OTP.", "error");
       } else {
-        setMessage("An error occurred. Please try again.");
+        notify("An error occurred. Please try again.", "error");
       }
-      setShowMessage(true);
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 3000);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-800">
       <div className="flex flex-col container max-w-xl bg-slate-500 gap-3 text-white p-10 rounded-2xl">
-        <p class="mt-2 text-3xl text-center my-10 font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <p className="mt-2 text-3xl text-center my-10 font-bold tracking-tight text-gray-900 sm:text-4xl">
           Verify OTP Code
         </p>
         <form
@@ -57,7 +62,7 @@ export default function OTPVerify() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
-              className="h-4 w-4 opacity-70 "
+              className="h-4 w-4 opacity-70"
             >
               <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
               <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
@@ -77,7 +82,7 @@ export default function OTPVerify() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
-              className="h-4 w-4 opacity-70 "
+              className="h-4 w-4 opacity-70"
             >
               <path
                 fillRule="evenodd"
@@ -100,11 +105,7 @@ export default function OTPVerify() {
         </form>
       </div>
 
-      {showMessage && (
-        <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-700 px-4 py-2 border border-red-200 rounded z-50">
-          {message}
-        </div>
-      )}
+      <ToastContainer />
     </div>
   );
 }

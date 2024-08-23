@@ -8,7 +8,8 @@ exports.addUser = async (req, res) => {
 
   try {
     const otpCode = sendEmail.otpGenerator(); // Generate OTP
-    const { name, lastname, email, password, role, dob, otp } = req.body;
+    const { name, lastname, email, password, role, dob } = req.body;
+
 
     let user = await User.findOne({ email });
     console.log(user);

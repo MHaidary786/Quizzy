@@ -9,4 +9,8 @@ router.post("/login", userController.login)
 router.delete("/deleteall", userController.deleteAllUsers)
 
 
+router.get("/hi", (req, res) => {
+    console.log("first")
+})
+
 module.exports = router;

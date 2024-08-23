@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
-// import "beercss";
-// import "material-dynamic-colors";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -15,45 +14,72 @@ const SignUpForm = () => {
     password: "",
     repeatPassword: "",
     role: "",
-    dob: "",
+    dob: "", // Added dob
   });
 
   const roles = ["admin", "teacher", "student"];
 
-  const [message, setMessage] = useState("Hello World!");
-  const [showMessage, setShowMessage] = useState(false);
+  const notify = (text, type) => {
+    toast(text, {
+      type,
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
+    // Validation checks
     if (user.email !== user.repeatEmail) {
-      console.log("Emails do not match!");
+      notify("Emails do not match!", "error");
       return;
     }
 
     if (user.password !== user.repeatPassword) {
-      console.log("Passwords do not match!");
+      notify("Passwords do not match!", "error");
+      return;
+    }
+
+    if (!user.role) {
+      notify("Please select a role!", "error");
       return;
     }
 
     try {
-      await axios.post("http://localhost:4000/user/add", {
-        name: user.name,
-        lastname: user.lastname,
-        email: user.email,
-        password: user.password,
-        role: user.role,
-        dob: user.dob,
-      });
-      console.log("User added successfully");
-      setMessage("User registered successfully");
-      setShowMessage(true);
+      console.log(user)
+      // Sending user data to the server
+      await axios.post(
+        "http://localhost:5000/user/add", 
+        {
+          name: user.name,
+          lastname: user.lastname,
+          email: user.email,
+          password: user.password,
+          role: user.role,
+          dob: user.dob
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }
+      );
+      notify("User registered successfully! Check your email for OTP.", "success");
+
+      // Navigate to OTP verification page after success
       setTimeout(() => {
-        setShowMessage(false);
-        navigate("/verifyotp");
+        navigate("/verifyotp", { state: { email: user.email } }); // Passing email to the next page
       }, 3000);
     } catch (error) {
-      console.log(error);
+      notify("Error registering user!", "error");
+      console.error(error);
     }
   };
 
@@ -61,24 +87,20 @@ const SignUpForm = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const handleRoleChange = (e) => {
+    setUser({ ...user, role: e.target.value });
+  };
+
   return (
-    <div className="flex items-center  justify-center min-h-screen bg-gray-800">
+    <div className="flex items-center justify-center min-h-screen bg-gray-800">
       <div className="flex flex-col container max-w-md bg-slate-500 gap-3 text-white p-14 rounded-2xl">
-        <p class="mt-2 text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <p className="mt-2 text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl">
           Sign Up
         </p>
-        <p className="text-center text-white-600">Create your account</p>
+        <p className="text-center text-white">Create your account</p>
         <form className="flex flex-col gap-3" onSubmit={handleSignUp}>
+          {/* Form fields */}
           <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-            </svg>
             <input
               name="name"
               type="text"
@@ -89,15 +111,6 @@ const SignUpForm = () => {
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-            </svg>
             <input
               name="lastname"
               type="text"
@@ -108,15 +121,6 @@ const SignUpForm = () => {
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-            </svg>
             <input
               name="email"
               type="email"
@@ -127,37 +131,16 @@ const SignUpForm = () => {
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-            </svg>
             <input
               name="repeatEmail"
               type="email"
-              placeholder="Repeat email"
+              placeholder="Repeat Email"
               onChange={handleChange}
               value={user.repeatEmail}
               className="grow"
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                clipRule="evenodd"
-              />
-            </svg>
             <input
               name="password"
               type="password"
@@ -168,29 +151,23 @@ const SignUpForm = () => {
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                clipRule="evenodd"
-              />
-            </svg>
             <input
               name="repeatPassword"
               type="password"
-              placeholder="Repeat password"
+              placeholder="Repeat Password"
               onChange={handleChange}
               value={user.repeatPassword}
               className="grow"
             />
           </label>
-          <select className="select select-bordered w-full">
-            <option disabled selected>
+          {/* Role selection */}
+          <select
+            name="role"
+            value={user.role}
+            onChange={handleRoleChange}
+            className="select select-bordered w-full"
+          >
+            <option value="" disabled>
               Select your Role
             </option>
             {roles.map((role) => (
@@ -199,21 +176,29 @@ const SignUpForm = () => {
               </option>
             ))}
           </select>
-          <p className="text-s">
-            Already have an account? {" "}
+          {/* Date of Birth */}
+          <label className="input input-bordered flex items-center gap-2">
+            <input
+              name="dob"
+              type="date"
+              onChange={handleChange}
+              value={user.dob}
+              className="grow"
+              placeholder="Date of Birth"
+            />
+          </label>
+          <p className="text-sm">
+            Already have an account?{" "}
             <Link className="underline text-cyan-400" to={"/login"}>
               Login
             </Link>
           </p>
-          <button type="submit">Sign up</button>
+          <button className="btn" type="submit">
+            Sign up
+          </button>
         </form>
+        <ToastContainer />
       </div>
-
-      {showMessage && (
-        <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-700 px-4 py-2 border border-red-200 rounded z-50">
-          {message}
-        </div>
-      )}
     </div>
   );
 };

@@ -6,16 +6,27 @@ import VerifyOTP from "./components/otpVerify"
 import Questions from "./components/create"
 import Quizzes from "./components/quizzes";
 
+
+
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
+
+
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
   Switch,
+  useNavigate,
+  useLocation,
 } from "react-router-dom";
 import Join from "./components/join";
 import JoinQuizPage from "./components/JoinQuizPage";
 import Templates from "./components/templates";
+import QuizPage from "./components/quiz";
 
 function App() {
 
@@ -32,6 +43,7 @@ function App() {
         <Route path="/join" element={<Join/>} />
         <Route path="/templates" element={<Templates/>} />
         <Route path="/join-quiz/:quizId" element={<JoinQuizPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
         {/* <Route path="/other" element={<OtherComponent />} /> */}
       </Routes>
     </Router>
@@ -39,3 +51,6 @@ function App() {
 }
 
 export default App;
+
+
+

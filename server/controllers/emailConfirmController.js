@@ -20,8 +20,8 @@ exports.transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // Use true for port 465, false for other ports
   auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS,
+    user: "john2018bates@gmail.com",
+    pass: "mjzd maal sdmp napr",
   },
 });
 
@@ -38,7 +38,7 @@ exports.sendMail = async (mailOptions) => {
 
 exports.sendOTP = async (email, otp) => {
   const mailOptions = {
-    from: `"Quiz App 👻" <${process.env.GMAIL_USER}>`, // sender address
+    from: `"Quiz App 👻" <john2018bates@gmail.com>`, // sender address
     to: email, // list of receivers, you should get the email from the request body
     subject: "Your OTP Code", // Subject line
     text: `Your OTP code is: ${otp}`, // plain text body
