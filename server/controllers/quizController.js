@@ -53,10 +53,10 @@ exports.getQuiz = async (req, res) => {
   
       const data = await response.json();
       const questions = data.results;
-  
+      // console.log(questions)
       // Create a new quiz document
       const quiz = new Quiz({
-        quizId: new mongoose.Types.ObjectId().toString(), // Generate a unique quizId
+        // quizId: new mongoose.Types.ObjectId().toString(), // Generate a unique quizId
         title: "Sample Quiz Title", // Set a title or use a dynamic title
       });
   
@@ -68,7 +68,7 @@ exports.getQuiz = async (req, res) => {
       quiz.questions = savedQuestions.map(question => question._id); // Link questions to the quiz
       await quiz.save(); // Update the quiz with question references
   
-      res.status(200).json({ quizId: quiz.quizId, questions: data.results });
+      res.status(200).json({  questions: data.results });
     } catch (error) {
       console.error("Error in getQuiz:", error);
       res.status(500).json({ error: "Internal Server Error" });

@@ -31,9 +31,10 @@ export default function Templates() {
       const url = `http://localhost:5000/quiz?amount=${selectedAmount}&difficulty=${selectedDifficulty}&category=${selectedCategoryId}&type=${selectedType}`;
       const response = await axios.get(url);
       console.log(response.data.results)
-      if (response.data.results) {
+      console.log(response.data)
+      if (response.data.questions) {
         // Pass questions to QuizPage through state
-        navigate("/quiz", { state: { questions: response.data.results } });
+        navigate("/quiz", { state: { questions: response.data.questions } });
       } else {
         setError("No questions found.");
       }
