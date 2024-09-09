@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 const http = require("http");
 const socketIo = require("socket.io");
 const cors = require('cors');
+require('dotenv').config(); 
+
 
 // Routes
 const userRoute = require("./routers/userRoutes");
@@ -16,7 +18,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-const PORT = 5000;
+const PORT = process.env.PORT;
 
 
 app.use(express.json());
@@ -29,7 +31,7 @@ app.use(cors());
 
 mongoose
   .connect(
-    "mongodb+srv://oula:94yrEyVqKA0V1k3g@firstcluster.woitwky.mongodb.net/quizapp"
+    process.env.MONGO_URL
   )
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));

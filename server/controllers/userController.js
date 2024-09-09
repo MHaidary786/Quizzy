@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("./emailConfirmController");
+require('dotenv').config(); 
 
 exports.addUser = async (req, res) => {
   console.log(req.body);
@@ -104,7 +105,7 @@ exports.login = async (req, res) => {
         userRole: user.role,
       },
     };
-    const token = jwt.sign(payload, "secret", {
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "5h",
     });
     res.status(200).json({ token });
