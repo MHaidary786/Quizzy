@@ -41,7 +41,7 @@ app.use("/user", userRoute);
 app.use("/quiz", quizzRoute);
 
 app.get("/", function (req, res) {
-  res.send("Hello World");
+  res.json("Hello World");
 });
 
 server.listen(PORT, () => {
