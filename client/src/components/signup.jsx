@@ -56,7 +56,7 @@ const SignUpForm = () => {
       console.log(user)
       // Sending user data to the server
       await axios.post(
-        "http://localhost:5000/user/add", 
+        "http://quizzy-5dpo.onrender.com:5000/user/add", 
         {
           name: user.name,
           lastname: user.lastname,

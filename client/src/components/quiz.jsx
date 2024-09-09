@@ -43,7 +43,7 @@ export default function QuizPage() {
       // Construct the data to send to the backend
       const answersArray = questions.map((_, index) => userAnswers[index] || '');
 
-      const response = await axios.post("http://localhost:5000/quiz/submit-answers", {
+      const response = await axios.post("http://quizzy-5dpo.onrender.com:5000/quiz/submit-answers", {
         userId,    // Pass the userId
         quizId,    // Pass the quizId
         answers: answersArray,  // Pass the answers as an array

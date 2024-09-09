@@ -34,7 +34,7 @@ const Quiz = () => {
 
   const handleSaveQuiz = () => {
     try {
-      axios.post("http://localhost:4000/quiz/add", { quizName, questions })
+      axios.post("http://quizzy-5dpo.onrender.com:4000/quiz/add", { quizName, questions })
         .then(response => {
           console.log(response.data);
         });

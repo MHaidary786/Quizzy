@@ -28,7 +28,7 @@ export default function Templates() {
   const fetchQuestions = async () => {
     setError(""); // Clear previous errors
     try {
-      const url = `http://localhost:5000/quiz?amount=${selectedAmount}&difficulty=${selectedDifficulty}&category=${selectedCategoryId}&type=${selectedType}`;
+      const url = `http://quizzy-5dpo.onrender.com:5000/quiz?amount=${selectedAmount}&difficulty=${selectedDifficulty}&category=${selectedCategoryId}&type=${selectedType}`;
       const response = await axios.get(url);
       console.log(response.data.results)
       console.log(response.data)

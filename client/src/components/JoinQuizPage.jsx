@@ -31,7 +31,7 @@ const JoinQuizPage = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:5000/sessions/${sessionId}/join`, { userName, avatar });
+      const response = await axios.post(`http://quizzy-5dpo.onrender.com:5000/sessions/${sessionId}/join`, { userName, avatar });
       if (response.data.success) {
         // Notify and redirect to the quiz session page
         notify('Successfully joined the quiz!', 'success');

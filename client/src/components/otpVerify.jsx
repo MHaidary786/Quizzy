@@ -26,7 +26,7 @@ export default function OTPVerify() {
   const handleVerify = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/user/verifyotp", {
+      const response = await axios.post("http://quizzy-5dpo.onrender.com:5000/user/verifyotp", {
         email,
         otp,
       });

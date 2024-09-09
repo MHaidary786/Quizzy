@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io('http://quizzy-5dpo.onrender.com:5000');
 
 const QuizSessionPage = ({ match }) => {
   const { sessionId } = match.params;

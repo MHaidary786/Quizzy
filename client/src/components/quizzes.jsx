@@ -7,7 +7,7 @@ export default function Quizzes() {
   useEffect(() => {
     const fetchedData = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/quiz/allquizzes");
+        const res = await axios.get("http://quizzy-5dpo.onrender.com:4000/quiz/allquizzes");
         console.log(res.data);
         setQuizzes(res.data);
       } catch (error) {
